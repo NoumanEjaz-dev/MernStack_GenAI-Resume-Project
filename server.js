@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const app = require('./src/app');
 const connectToDB = require('./src/config/database');
+const authRouter = require('./src/routes/auth.routes');
 
 connectToDB();
 
