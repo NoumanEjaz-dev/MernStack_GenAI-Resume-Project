@@ -3,11 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 /**
- * @name registerUserController
- * @description Register a new user. exppects username, email an password in the required 
- * @access Public 
+ *  @function registerUserController
+ *  @description Handles user registration.
+ *  Validates input, checks for existing user, hashes password, and stores user in DB.
+ *  @route POST /api/auth/register
+ *  @access Public 
  */
-
 
 async function registerUserController(req, res){
     const {username, email, password} = req.body;
@@ -57,15 +58,18 @@ async function registerUserController(req, res){
  
 }
 
-
 /**
- * @name LoginUserController
- * @description Login a new user. expects  email and password in the request body 
- * @access Public 
+ * @function loginUserController
+ * @description Authenticates user credentials and issues an authentication response.
+ * Performs user lookup, password hash comparison, and handles invalid credential scenarios securely.
+ * @route POST /api/auth/login
+ * @access Public
  */
-async function LoginUserController(req, res) {
-    const {email , password} =req.body
 
+async function loginUserController(req, res) {
+    const {email , password} =req.body
+    
+    // Check if user already exists to prevent duplicate accounts
     const user = await userModel.findOne({email})
     
     if(!user){
@@ -98,5 +102,5 @@ async function LoginUserController(req, res) {
 } 
 module.exports ={
     registerUserController,
-    LoginUserController
+    loginUserController
 }

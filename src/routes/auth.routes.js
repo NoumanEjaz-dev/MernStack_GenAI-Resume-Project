@@ -9,10 +9,7 @@ const authRouter = Router();
  * @access Public 
  */
 
-
 authRouter.post("/register", authController.registerUserController);
-
-
 
 /**
  * @route POST /api/auth/Login
@@ -20,17 +17,7 @@ authRouter.post("/register", authController.registerUserController);
  * @access Public 
  */
 
-authRouter.post('/login', authController.LoginUserController);
-
-
-// authRouter.post('/register', (req, res)=>{
-//     res.send("register api this is a post api")
-// })
-
-// authRouter.get('/login', (req , res)=>{
-//     res.send("login api this is a get api");
-// }) 
-
+authRouter.post('/login', authController.loginUserController);
 
 module.exports = authRouter;
 
