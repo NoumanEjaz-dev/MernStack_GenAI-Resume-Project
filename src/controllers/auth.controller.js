@@ -107,7 +107,7 @@ async function loginUserController(req, res) {
  * @description clear token.
  * Performs user lookup, password hash comparison, and handles invalid credential scenarios securely.
  * @route POST /api/auth/login
- * @access Public
+ * @access Private
  */
 
 async function logoutUserController(req, res) {
@@ -124,8 +124,30 @@ async function logoutUserController(req, res) {
 }
 
 
+/**
+ * @function getMeController
+ * @description get the current logged in user details.
+ * @route GET /api/auth/get-me
+ * @access Public
+ */
+
+
+async function getMeController(req ,  res){
+    const user = await userModel.findById(req.user.id)
+
+    res.status(200).json({
+        message: "User details fetched successfully",
+        users:{
+            id:user._id,
+            username: user.username,
+            email: user.email
+        }
+    })
+}
+
 module.exports ={
     registerUserController,
     loginUserController,
-    logoutUserController
+    logoutUserController,
+    getMeController
 }
